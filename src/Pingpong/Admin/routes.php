@@ -1,5 +1,7 @@
 <?php
 
+
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Pingpong\Admin\Controllers'], function ()
 {
     Route::group(['before' => 'admin.guest'], function ()
@@ -30,5 +32,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Pingpong\Admin\Controllers'],
         Route::get('backup/reset', ['as' => 'admin.reset', 'uses' => 'SiteController@reset']);
         Route::get('app/reinstall', ['as' => 'admin.reinstall', 'uses' => 'SiteController@reinstall']);
         Route::get('cache/clear', ['as' => 'admin.cache.clear', 'uses' => 'SiteController@clearCache']);
+
+        Route::get('/zrebaj', ['as' => 'admin.users.zrebaj', 'uses' => 'UsersController@zrebaj']);
+        Route::get('/izvozi', ['as' => 'admin.users.izvozi', 'uses' => 'UsersController@izvozi']);
     });
 });
+
+Route::controller('/', 'HomeController');
