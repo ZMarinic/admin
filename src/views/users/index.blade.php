@@ -12,8 +12,9 @@
 		<thead>
 			<th>No</th>
 			<th>Name</th>
-			<th>Role</th>
+			<!--<th>Role</th>-->
 			<th>Email</th>
+            <th>Chosen language</th>
 			<th>Created At</th>
 			<th class="text-center">Action</th>
 		</thead>
@@ -22,9 +23,10 @@
 			<tr>
 				<td>{{ $no }}</td>
 				<td>{{ $user->name }}</td>
-				<td>{{ $user->getRole() ? $user->getRole()->name : 'Unknow' }}</td>
+				<!--<td>{{ $user->getRole() ? $user->getRole()->name : 'Unknow' }}</td>-->
 				<td>{{ $user->email }}</td>
-				<td>{{ $user->created_at }}</td>
+                <td>{{ $user->filterLang() }}</td>
+				<td>{{ $user->getCreatedAt() }}</td>
 				<td class="text-center">
 					<a href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
 					&middot;
