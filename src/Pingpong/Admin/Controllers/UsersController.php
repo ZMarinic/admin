@@ -1,6 +1,7 @@
 <?php namespace Pingpong\Admin\Controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends BaseController {
 
@@ -166,6 +167,44 @@ class UsersController extends BaseController {
         {
             return $this->redirectNotFound();
         }
+    }
+
+    public function zrebaj()
+    {
+        $randomuser = \User::all()->random(1);
+
+        return $this->view('users.zrebaj', compact('randomuser'));
+    }
+
+    public function izvozi()
+    {
+
+        Excel::create('Uporabniki_nagradna_igra', function($file) {
+
+            $file->sheet('Uporabniki', function($sheet) {
+
+                $allusers = $this->users->all();
+
+                $allusers = $this->users->all();
+                $data = array();
+                $i = 1;
+
+                foreach ($allusers as $user)
+                {
+                    $data[$i]['ime'] = $user->name;
+                    $data[$i]['email'] = $user->email;
+
+                    $sheet->appendRow(array(
+                        $data[$i]['ime'], $data[$i]['email']
+                    ));
+
+                    $i++;
+                }
+
+            });
+
+        })->download('xls');
+
     }
 
 }
