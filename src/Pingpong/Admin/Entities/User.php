@@ -85,8 +85,13 @@ class User extends Model implements UserInterface, RemindableInterface {
     public function filterLang()
     {
         $languages = array('ru' => 'Ruščina', 'it' => 'Italijanščina', 'fr' => 'Francoščina', 'en' => 'Angleščina', 'de' => 'Nemščina');
-
-        return $languages[$this->getLang()];
+        $lang = $this->getLang();
+        if (!empty($lang))
+        {
+            return $languages[$this->getLang()];
+        } else {
+            return '';
+        }
     }
 
 }
